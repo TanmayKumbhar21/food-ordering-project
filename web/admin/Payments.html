@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments Management</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex;">
+
+    <!-- Sidebar -->
+   <div style="width: 250px; background-color: #343a40; color: white; height: 100vh; padding-top: 20px; position: fixed;">
+    <h2 style="text-align: center;">Admin Panel</h2>
+    <ul style="list-style: none; padding: 0;">
+        <li style="padding: 15px; cursor: pointer;" onclick="navigateTo('dashboard.html')">Dashboard</li>
+        <li style="padding: 15px; cursor: pointer;" onclick="navigateTo('OrdersManagement.html')">Orders Management</li>
+        <li style="padding: 15px; cursor: pointer;" onclick="navigateTo('UserManagement.html')">Users Management</li>
+        <li style="padding: 15px; cursor: pointer;" onclick="navigateTo('payments.html')">Payments</li>
+        <li style="padding: 15px; cursor: pointer; color: red;" onclick="logout()">Logout</li> 
+    </ul>
+</div>
+
+<script>
+    function navigateTo(page) {
+        window.location.href = page;
+    }
+
+    function logout() {
+        window.location.href = 'AdminLogoutServlet';
+    }
+</script>
+
+    <!-- Main Content -->
+    <div style="margin-left: 260px; padding: 20px; width: 100%;">
+        <h2>Payments Management</h2>
+
+        <!-- Cash on Delivery Orders -->
+        <h3>Cash on Delivery Order History</h3>
+        <table border="1" width="100%" style="border-collapse: collapse; text-align: left; margin-bottom: 20px;">
+            <thead>
+                <tr style="background-color: #007bff; color: white;">
+                    <th style="padding: 10px;">Order ID</th>
+                    <th style="padding: 10px;">Customer Name</th>
+                    <th style="padding: 10px;">Amount</th>
+                    <th style="padding: 10px;">Status</th>
+                </tr>
+            </thead>
+            <tbody id="codOrdersTable">
+                <!-- Orders dynamically added here -->
+            </tbody>
+        </table>
+
+        <!-- Transactions History -->
+        <h3>Total Transactions</h3>
+        <table border="1" width="100%" style="border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: #28a745; color: white;">
+                    <th style="padding: 10px;">Transaction ID</th>
+                    <th style="padding: 10px;">Order ID</th>
+                    <th style="padding: 10px;">Amount</th>
+                    <th style="padding: 10px;">Date</th>
+                </tr>
+            </thead>
+            <tbody id="transactionsTable">
+                <!-- Transactions dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCODOrders();
+            loadTransactions();
+        });
+
+        function loadCODOrders() {
+            let codOrders = [
+                { orderId: 101, customer: "Amit", amount: "₹250", status: "Completed" },
+                { orderId: 102, customer: "Sneha", amount: "₹400", status: "Pending" },
+                { orderId: 103, customer: "Rahul", amount: "₹150", status: "Completed" }
+            ];
+
+            let table = document.getElementById("codOrdersTable");
+            table.innerHTML = "";
+
+            codOrders.forEach(order => {
+                let row = `<tr>
+                    <td style="padding: 10px;">${order.orderId}</td>
+                    <td style="padding: 10px;">${order.customer}</td>
+                    <td style="padding: 10px;">${order.amount}</td>
+                    <td style="padding: 10px;">${order.status}</td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+
+        function loadTransactions() {
+            let transactions = [
+                { transactionId: "T001", orderId: 101, amount: "₹250", date: "2025-03-20" },
+                { transactionId: "T002", orderId: 103, amount: "₹150", date: "2025-03-22" }
+            ];
+
+            let table = document.getElementById("transactionsTable");
+            table.innerHTML = "";
+
+            transactions.forEach(transaction => {
+                let row = `<tr>
+                    <td style="padding: 10px;">${transaction.transactionId}</td>
+                    <td style="padding: 10px;">${transaction.orderId}</td>
+                    <td style="padding: 10px;">${transaction.amount}</td>
+                    <td style="padding: 10px;">${transaction.date}</td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+    </script>
+
+</body>
+</html>

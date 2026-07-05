@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Order List</title>
+    <style>
+        body { background-color: black; color: white; text-align: center; padding: 20px; }
+        .order-container { max-width: 600px; margin: 50px auto; background: #222; padding: 20px; border-radius: 10px; }
+        .order-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #444; }
+        .btn { background: green; color: white; padding: 10px 15px; border: none; cursor: pointer; border-radius: 5px; text-decoration: none; }
+        .remove-btn { background: red; color: white; padding: 5px 10px; border: none; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Your Order List</h1>
+    <div class="order-container" id="order-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let orderList = JSON.parse(localStorage.getItem('orderList')) || [];
+            const orderContainer = document.getElementById('order-container');
+            let totalPrice = 0;
+
+            orderContainer.innerHTML = '';
+
+            if (!Array.isArray(orderList) || orderList.length === 0) {
+                orderContainer.innerHTML = '<p>Your order list is empty.</p>';
+                return;
+            }
+
+            orderList.forEach((item, index) => {
+                totalPrice += item.price * item.quantity;
+
+                orderContainer.innerHTML += `
+                    <div class="order-item">
+                        <span>${item.name} x ${item.quantity}</span>
+                        <span>₹${item.price * item.quantity}</span>
+                        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                    </div>
+                `;
+            });
+
+            orderContainer.innerHTML += `<h3>Total: ₹${totalPrice}</h3>`;
+            orderContainer.innerHTML += `<a href="checkout.html" class="btn">Proceed to Checkout</a>`;
+        });
+
+        function removeItem(index) {
+            let orderList = JSON.parse(localStorage.getItem('orderList')) || [];
+            orderList.splice(index, 1);
+            localStorage.setItem('orderList', JSON.stringify(orderList));
+            location.reload(); // Page refresh to update list
+        }
+    </script>
+</body>
+</html>

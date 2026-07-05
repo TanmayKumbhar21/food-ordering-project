@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Menu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #f8f9fa;
+      text-align: center;
+      position: relative;
+    }
+    .orderlist-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .menu-container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
+      border-radius: 20px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .menu-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .menu-item:hover {
+      transform: scale(1.05);
+    }
+    .menu-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .menu-item h3 {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="orderlist-icon" onclick="openOrderList()">ORDER LIST</div>
+
+  <div class="menu-container">
+    <input type="text" class="search-bar" placeholder="Search for dishes...">
+    <div class="menu-grid">
+      <div class="menu-item" onclick="openPage('Veg.html')">
+        <img src="images/capveg.jpg" alt="Veg">
+        <h3>VEG</h3>
+      </div>
+      <div class="menu-item" onclick="openPage('nonveg.html')">
+        <img src="images/capnonveg.jpg" alt="Non-Veg">
+        <h3>NON-VEG</h3>
+      </div>
+      <div class="menu-item" onclick="openPage('fastfood.html')">
+        <img src="images/capfastfood.jpg" alt="Fast Food">
+        <h3>FAST FOOD</h3>
+      </div>
+      <div class="menu-item" onclick="openPage('breakfast.html')">
+        <img src="images/rimg2.jpg" alt="Breakfast">
+        <h3>BREAKFAST</h3>
+      </div>
+      <div class="menu-item" onclick="openPage('colddrink.html')">
+        <img src="images/capicecream.jpg" alt="Cold Drink & Ice Cream">
+        <h3>COLD DRINK & ICE CREAM</h3>
+      </div>
+      <div class="menu-item" onclick="openPage('snacks.html')">
+        <img src="images/capsnack.jpg" alt="Snacks">
+        <h3>SNACKS</h3>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPage(pageUrl) {
+      window.location.href = pageUrl;
+    }
+
+    function openOrderList() {
+      window.location.href = 'orderlist.html';
+    }
+  </script>
+</body>
+</html>

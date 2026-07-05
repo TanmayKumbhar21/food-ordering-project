@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+<body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; margin: 0;">
+
+    <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 300px; text-align: center;">
+        <h2 style="color: #333;">Admin Login</h2>
+
+        <form id="adminLoginForm">
+            <div style="margin-bottom: 15px;">
+                <input type="text" id="adminUsername" placeholder="Enter Username" 
+                       style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <input type="password" id="adminPassword" placeholder="Enter Password" 
+                       style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            </div>
+
+            <button type="button" onclick="adminLogin()" 
+                    style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Login
+            </button>
+        </form>
+
+        <p id="errorMessage" style="color: red; margin-top: 10px; display: none;">Invalid credentials!</p>
+    </div>
+
+    <script>
+        function adminLogin() {
+            var username = document.getElementById("adminUsername").value;
+            var password = document.getElementById("adminPassword").value;
+
+            // Temporary hardcoded credentials (Backend जोडल्यावर Database वरून तपासू)
+            var correctUsername = "admin";
+            var correctPassword = "1234";
+
+            if (username === correctUsername && password === correctPassword) {
+                window.location.href = "dashboard.html"; // Admin Dashboard वर Redirect
+            } else {
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
